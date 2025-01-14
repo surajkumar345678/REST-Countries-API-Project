@@ -1,6 +1,7 @@
 const countriesContainer = document.querySelector(".countries-container");
 const filterByRegion = document.querySelector(".filter-by-region");
 const searchInput = document.querySelector(".search-container input");
+const modeSwitch = document.querySelector(".mode-switch");
 
 let allCountriesData = fetch("https://restcountries.com/v3.1/all")
   .then((res) => res.json())
@@ -41,4 +42,10 @@ searchInput.addEventListener("input", (e) => {
     country.name.common.toLowerCase().includes(e.target.value.toLowerCase())
   );
   renderCountries(filteredCountries);
+});
+
+modeSwitch.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  modeSwitch.classList.toggle("dark");
+
 });
