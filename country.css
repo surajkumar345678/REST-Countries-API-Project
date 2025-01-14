@@ -2,11 +2,13 @@
   padding: 8px 24px;
   box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .country-details-container {
   max-width: 1200px;
   margin-inline: auto;
+  margin-top: 32px;
 }
 
 .country-details {
@@ -18,6 +20,7 @@
 
 .country-details img {
   width: 40%;
+  border: 1px solid #ddd;
 }
 
 .details-text {

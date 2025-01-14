@@ -152,6 +152,45 @@ a {
   width: 100%;
 }
 
+.search-filter-container {
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-top: 16px;
+  margin-bottom: 48px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.search-container {
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.15);
+  max-width: 350px;
+  width: 100%;
+  border-radius: 4px;
+  padding-left: 24px;
+  overflow: hidden;
+}
+
+.search-container input {
+  outline: none;
+  border: none;
+  padding: 16px;
+  width: 90%;
+}
+
+.search-container input::placeholder,
+.search-container i {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.filter-by-region {
+  width: 200px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
 @media (max-width: 768px) {
   .countries-container {
     justify-content: center;
@@ -161,5 +200,8 @@ a {
   }
   .header-content p {
     font-size: 12px;
+  }
+  .search-filter-container {
+    flex-direction: column;
   }
 }
