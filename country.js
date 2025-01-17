@@ -2,26 +2,77 @@
 const modeSwitch = document.querySelector(".mode-switch");
 const body = document.body;
 
-// Check if dark mode preference is stored in localStorage
-const savedMode = localStorage.getItem("darkMode");
-if (savedMode === "true") {
-  body.classList.add("dark");
-  modeSwitch.innerHTML = `<i class="fa-regular fa-sun"></i>&nbsp;&nbsp;Light Mode`;
-} else {
-  body.classList.remove("dark");
-  modeSwitch.innerHTML = `<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode`;
-}
-
-// Event Listener for Dark Mode Toggle
+// Handle Dark Mode Toggle and Save Preference
 modeSwitch.addEventListener("click", () => {
   body.classList.toggle("dark");
-
-  // Save the mode in localStorage
   const isDarkMode = body.classList.contains("dark");
-  localStorage.setItem("darkMode", isDarkMode);
 
-  const modeText = isDarkMode ? "Light Mode" : "Dark Mode";
-  modeSwitch.innerHTML = `<i class="fa-regular ${isDarkMode ? "fa-sun" : "fa-moon"}"></i>&nbsp;&nbsp;${modeText}`;
+  // Update the toggle text
+  modeSwitch.innerHTML = isDarkMode
+    ? '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;Light Mode'
+    : '<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode';
+
+  // Save the preference to local storage
+  localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+});
+
+// Load the saved theme preference on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark");
+    modeSwitch.innerHTML = '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;Light Mode';
+  } else {
+    body.classList.remove("dark");
+    modeSwitch.innerHTML = '<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode';
+  }
+});
+
+// Fetch and Render All Countries Data
+const countriesContainer = document.querySelector(".countries-container");
+const filterByRegion = document.querySelector(".filter-by-region");
+const searchInput = document.querySelector(".search-container input");
+
+let allCountriesData = fetch("https://restcountries.com/v3.1/all")
+  .then((res) => res.json())
+  .then((data) => {
+    renderCountries(data);
+    allCountriesData = data;
+  });
+
+// Handle Region Filtering
+filterByRegion.addEventListener("change", (e) => {
+  fetch(`https://restcountries.com/v3.1/region/${filterByRegion.value}`)
+    .then((res) => res.json())
+    .then(renderCountries);
+});
+
+// Render Countries into the Container
+function renderCountries(data) {
+  countriesContainer.innerHTML = "";
+  data.forEach((country) => {
+    const countryCard = document.createElement("a");
+    countryCard.classList.add("country-card");
+    countryCard.href = `country.html?name=${country.name.common}`;
+    countryCard.innerHTML = `
+      <img src="${country.flags.svg}" alt="${country.name.common} flag" loading="lazy" />
+      <div class="card-text">
+        <h3 class="card-title">${country.name.common}</h3>
+        <p><b>Population: </b>${Intl.NumberFormat("en-IN").format(country.population)}</p>
+        <p><b>Region: </b>${country.region}</p>
+        <p><b>Capital: </b>${country.capital?.[0]}</p>
+      </div>
+    `;
+    countriesContainer.append(countryCard);
+  });
+}
+
+// Handle Search Input
+searchInput.addEventListener("input", (e) => {
+  const filteredCountries = allCountriesData.filter((country) =>
+    country.name.common.toLowerCase().includes(e.target.value.toLowerCase())
+  );
+  renderCountries(filteredCountries);
 });
 
 // Fetch Country Details
@@ -44,9 +95,7 @@ fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
   .then(([country]) => {
     flagImage.src = country.flags.svg;
     countryNameH1.innerText = country.name.common;
-    population.innerText = Intl.NumberFormat("en-IN").format(
-      country.population
-    );
+    population.innerText = Intl.NumberFormat("en-IN").format(country.population);
     region.innerText = country.region;
     subRegion.innerText = country.subregion || "No Subregion Info";
     capital.innerText = country.capital?.[0] || "No Capital Info";
@@ -65,7 +114,7 @@ fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
       : country.name.common;
 
     if (country.borders) {
-      // Fetching and displaying border countries as before
+      // Fetching and displaying border countries
       Promise.all(
         country.borders.map((border) =>
           fetch(`https://restcountries.com/v3.1/alpha/${border}`).then((res) =>
