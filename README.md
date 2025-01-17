@@ -32,19 +32,20 @@ Check out the live demo [here](https://surajkumar345678.github.io/REST-Countries
 
 ## 📸 Screenshots
 ### Home Page
-![Home Page](screenshots/home-page.png)
+![Home Page](https://github.com/user-attachments/assets/7d517cdf-f689-4b4a-9976-e01661678029)
 
 ### Country Details
-![Country Details](screenshots/country-details.png)
+![Country Details](https://github.com/user-attachments/assets/b56837b0-20db-4d0a-8313-140907cf9704)
 
 ### Filter by Region
-![Filter by Region](screenshots/filter-by-region.png)
+![Filter by Region](https://github.com/user-attachments/assets/ddc31e1f-4153-4a97-bd71-e0fa73d008e9)
 
 ### Mobile View
-![Mobile View](screenshots/mobile-view.png)
+![Mobile View](https://github.com/user-attachments/assets/14723526-47f4-4632-8b7c-c5d22374e615)
 
 ### Dark Mode
-![Dark Mode](screenshots/dark-mode.png)
+![Dark Mode](https://github.com/user-attachments/assets/ad2d1105-4b32-4da9-8c86-a497cf6a3803)
+
 
 ## 📚 API Reference
 This project uses the [REST Countries API](https://restcountries.com/) to fetch country data.
