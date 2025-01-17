@@ -43,6 +43,12 @@ Here are some screenshots of the application:
 ### Filter by Region
 ![Filter by Region](screenshots/filter-by-region.png)
 
+### Mobile View
+![Mobile View](screenshots/mobile-view.png)
+
+### Dark Mode
+![Dark Mode](screenshots/dark-mode.png)
+
 ## API Reference
 This project uses the [REST Countries API](https://restcountries.com/) to fetch country data.
 
