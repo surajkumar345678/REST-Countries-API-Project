@@ -2,12 +2,26 @@
 const modeSwitch = document.querySelector(".mode-switch");
 const body = document.body;
 
+// Check if dark mode preference is stored in localStorage
+const savedMode = localStorage.getItem("darkMode");
+if (savedMode === "true") {
+  body.classList.add("dark");
+  modeSwitch.innerHTML = `<i class="fa-regular fa-sun"></i>&nbsp;&nbsp;Light Mode`;
+} else {
+  body.classList.remove("dark");
+  modeSwitch.innerHTML = `<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode`;
+}
+
+// Event Listener for Dark Mode Toggle
 modeSwitch.addEventListener("click", () => {
   body.classList.toggle("dark");
-  const modeText = body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
-  modeSwitch.innerHTML = `<i class="fa-regular ${
-    body.classList.contains("dark") ? "fa-sun" : "fa-moon"
-  }"></i>&nbsp;&nbsp;${modeText}`;
+
+  // Save the mode in localStorage
+  const isDarkMode = body.classList.contains("dark");
+  localStorage.setItem("darkMode", isDarkMode);
+
+  const modeText = isDarkMode ? "Light Mode" : "Dark Mode";
+  modeSwitch.innerHTML = `<i class="fa-regular ${isDarkMode ? "fa-sun" : "fa-moon"}"></i>&nbsp;&nbsp;${modeText}`;
 });
 
 // Fetch Country Details
