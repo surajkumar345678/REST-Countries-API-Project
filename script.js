@@ -24,12 +24,17 @@ function renderCountries(data) {
   data.forEach((country) => {
     const countryCard = document.createElement("a");
     countryCard.classList.add("country-card");
-    countryCard.href = `https://neon-cobbler-a1a1dd.netlify.app//country.html?name=${country.name.common}`;
+    countryCard.href = `https://surajkumar345678.github.io/REST-Countries-API-Project/country.html?name=${country.name.common}`;
+
     countryCard.innerHTML = `
-      <img src="${country.flags.svg}" alt="${country.name.common} flag" loading="lazy" />
+      <img src="${country.flags.svg}" alt="${
+      country.name.common
+    } flag" loading="lazy" />
       <div class="card-text">
         <h3 class="card-title">${country.name.common}</h3>
-        <p><b>Population: </b>${Intl.NumberFormat("en-IN").format(country.population)}</p>
+        <p><b>Population: </b>${Intl.NumberFormat("en-IN").format(
+          country.population
+        )}</p>
         <p><b>Region: </b>${country.region}</p>
         <p><b>Capital: </b>${country.capital?.[0]}</p>
       </div>
@@ -50,7 +55,7 @@ searchInput.addEventListener("input", (e) => {
 modeSwitch.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   const isDarkMode = document.body.classList.contains("dark");
-  
+
   // Update the toggle text
   modeSwitch.innerHTML = isDarkMode
     ? '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;Light Mode'
@@ -65,9 +70,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     document.body.classList.add("dark");
-    modeSwitch.innerHTML = '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;Light Mode';
+    modeSwitch.innerHTML =
+      '<i class="fa-solid fa-sun"></i>&nbsp;&nbsp;Light Mode';
   } else {
     document.body.classList.remove("dark");
-    modeSwitch.innerHTML = '<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode';
+    modeSwitch.innerHTML =
+      '<i class="fa-regular fa-moon"></i>&nbsp;&nbsp;Dark Mode';
   }
 });
