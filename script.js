@@ -24,7 +24,7 @@ function renderCountries(data) {
   data.forEach((country) => {
     const countryCard = document.createElement("a");
     countryCard.classList.add("country-card");
-    countryCard.href = `/country.html?name=${country.name.common}`;
+    countryCard.href = `https://neon-cobbler-a1a1dd.netlify.app//country.html?name=${country.name.common}`;
     countryCard.innerHTML = `
       <img src="${country.flags.svg}" alt="${country.name.common} flag" loading="lazy" />
       <div class="card-text">
