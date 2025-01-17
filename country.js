@@ -1,3 +1,16 @@
+// Dark Mode Toggle
+const modeSwitch = document.querySelector(".mode-switch");
+const body = document.body;
+
+modeSwitch.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  const modeText = body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+  modeSwitch.innerHTML = `<i class="fa-regular ${
+    body.classList.contains("dark") ? "fa-sun" : "fa-moon"
+  }"></i>&nbsp;&nbsp;${modeText}`;
+});
+
+// Fetch Country Details
 const countryName = new URLSearchParams(location.search).get("name");
 
 const flagImage = document.querySelector(".country-details img");
@@ -15,51 +28,48 @@ const borderCountries = document.querySelector(".border-countries");
 fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
   .then((res) => res.json())
   .then(([country]) => {
-    console.log(country);
     flagImage.src = country.flags.svg;
     countryNameH1.innerText = country.name.common;
     population.innerText = Intl.NumberFormat("en-IN").format(
       country.population
     );
     region.innerText = country.region;
-    if (country.subregion) {
-      subRegion.innerText = country.subregion;
-    }
-    if (country.capital?.[0]) {
-      capital.innerText = country.capital?.[0];
-    }
-
+    subRegion.innerText = country.subregion || "No Subregion Info";
+    capital.innerText = country.capital?.[0] || "No Capital Info";
     tld.innerText = country.tld.join(", ");
+    currency.innerText = country.currencies
+      ? Object.values(country.currencies)
+          .map((curr) => `${curr.name} (${curr.symbol || "N/A"})`)
+          .join(", ")
+      : "No Currency Info";
+    languages.innerText = country.languages
+      ? Object.values(country.languages).join(", ")
+      : "No Language Info";
 
-    if (country.currencies) {
-      currency.innerText = Object.values(country.currencies)
-        .map(function (currency) {
-          return currency.name + " (" + (currency.symbol || "N/A") + ")";
-        })
-        .join(", ");
-    } else {
-      currency.innerText = "N/A";
-    }
+    nativeName.innerText = country.name.nativeName
+      ? Object.values(country.name.nativeName)[0].common
+      : country.name.common;
 
-    if (country.languages) {
-      languages.innerText = Object.values(country.languages).join(", ");
-    }
-
-    if (country.name.nativeName) {
-      nativeName.innerText = Object.values(country.name.nativeName)[0].common;
-    } else {
-      nativeName.innerText = country.name.common;
-    }
     if (country.borders) {
-      country.borders.forEach((border) => {
-        fetch(`https://restcountries.com/v3.1/alpha/${border}`)
-          .then((res) => res.json())
-          .then(([borderCountry]) => {
-            const borderCountryTag = document.createElement("a");
-            borderCountryTag.innerText = borderCountry.name.common;
-            borderCountryTag.href = `country.html?name=${borderCountry.name.common}`;
-            borderCountries.append(borderCountryTag);
-          });
+      // Fetching and displaying border countries as before
+      Promise.all(
+        country.borders.map((border) =>
+          fetch(`https://restcountries.com/v3.1/alpha/${border}`).then((res) =>
+            res.json()
+          )
+        )
+      ).then((results) => {
+        results.forEach(([borderCountry]) => {
+          const borderCountryTag = document.createElement("a");
+          borderCountryTag.innerText = borderCountry.name.common;
+          borderCountryTag.href = `country.html?name=${borderCountry.name.common}`;
+          borderCountries.append(borderCountryTag);
+        });
       });
+    } else {
+      // Display a message when there are no border countries
+      const noBordersMessage = document.createElement("span");
+      noBordersMessage.innerText = `${countryName} has no border countries.`;
+      borderCountries.append(noBordersMessage);
     }
   });
