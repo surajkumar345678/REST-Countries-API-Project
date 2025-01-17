@@ -1,39 +1,36 @@
-# REST-Countries-API-Project
+# 🌍 REST Countries API Project
 
-## Overview
-This project is a web application that provides information about countries using the REST Countries API. Users can search for countries, view detailed information, and filter countries by region.
+## 📖 Overview
+A sleek web application that leverages the REST Countries API to provide comprehensive information about countries. Users can effortlessly search for countries, view detailed information, and filter countries by region.
 
-## Features
-- Search for countries by name
-- View detailed information about a country
-- Filter countries by region
-- Responsive design
+## ✨ Features
+- 🔍 **Search**: Find countries by name.
+- 📋 **Details**: View extensive information about each country.
+- 🌎 **Filter**: Narrow down countries by region.
+- 📱 **Responsive**: Optimized for all devices.
+- 🌗 **Dark Mode**: Switch between light and dark themes.
 
-## Technologies Used
-- HTML
-- CSS
-- JavaScript
-- REST Countries API
+## 🛠️ Technologies Used
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **REST Countries API**
 
-## Getting Started
-To get a local copy up and running, follow these steps:
-
+## 🚀 Getting Started
 ### Prerequisites
 - A modern web browser
 - Internet connection
 
-## Project Demo
-You can view a live demo of the project [here](https://surajkumar345678.github.io/REST-Countries-API-Project/).
+## 🌐 Project Demo
+Check out the live demo [here](https://surajkumar345678.github.io/REST-Countries-API-Project/).
 
-## Usage
+## 📚 Usage
 1. Open the application in your web browser.
 2. Use the search bar to find a country by name.
 3. Click on a country to view detailed information.
 4. Use the region filter to narrow down the list of countries.
 
-## Screenshots
-Here are some screenshots of the application:
-
+## 📸 Screenshots
 ### Home Page
 ![Home Page](screenshots/home-page.png)
 
@@ -49,15 +46,15 @@ Here are some screenshots of the application:
 ### Dark Mode
 ![Dark Mode](screenshots/dark-mode.png)
 
-## API Reference
+## 📚 API Reference
 This project uses the [REST Countries API](https://restcountries.com/) to fetch country data.
 
-## Contributing
+## 🤝 Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-## License
+## 📄 License
 This project is licensed under the MIT License.
 
-## Acknowledgements
+## 🙏 Acknowledgements
 - [REST Countries API](https://restcountries.com/)
 - [Frontend Mentor](https://www.frontendmentor.io/) for the project idea
